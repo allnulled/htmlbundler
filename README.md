@@ -2,10 +2,6 @@
 
 Pack JS universal modules from CLI or API from a list of files. But no webpack or shit. Simple.
 
-# htmlbundler
-
-Pack JS universal modules from CLI or API from a list of files. But no webpack or shit. Simple.
-
 ## Install
 
 ```sh
