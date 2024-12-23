@@ -1,1 +1,1 @@
-window.c = 3;
+window.c = 30;

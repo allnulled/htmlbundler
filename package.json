@@ -1,13 +1,13 @@
 {
-  "name": "@allnulled/vuebundler",
+  "name": "@allnulled/htmlbundler",
   "version": "1.0.1",
   "description": "Like simplebundler but using a *.js list file instead of a directory",
-  "main": "vuebundler.js",
+  "main": "htmlbundler.js",
   "bin": {
-    "vuebundler": "vuebundler.bin.js"
+    "htmlbundler": "htmlbundler.bin.js"
   },
   "scripts": {
-    "test": "npx mocha --bail test/test.js"
+    "test": "npx mocha test/test.js"
   },
   "keywords": [
     "bundler",

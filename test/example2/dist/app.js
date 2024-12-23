@@ -7,7 +7,7 @@
     global["example2app"] = mod;
   }
 })(function() {
-window.a = 10;
-window.b = 20;
-window.c = 30;
+window.a = 1;
+window.b = 2;
+window.c = 3;
 });
