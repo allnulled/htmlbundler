@@ -1,6 +1,6 @@
 {
   "name": "@allnulled/htmlbundler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Like simplebundler but using a *.js list file instead of a directory",
   "main": "htmlbundler.js",
   "bin": {
@@ -9,7 +9,12 @@
   "scripts": {
     "test": "npx mocha test/test.js"
   },
-  "keywords": ["bundler", "html", "css", "js"],
+  "keywords": [
+    "bundler",
+    "html",
+    "css",
+    "js"
+  ],
   "author": "allnulled",
   "license": "WTFPL"
 }
