@@ -1,4 +1,4 @@
-class HtmlBundler {
+class vuebundler {
 
   static create(...args) {
     return new this(...args);
@@ -65,33 +65,66 @@ class HtmlBundler {
     if(typeof _module !== "boolean") {
       throw new Error("Required parameter «module» to be a boolean");
     }
-    const outputpath = path.resolve(output);
+    const outputpathJs = path.resolve(output);
+    const outputpathCss = path.resolve(output).replace(/\.js$/g, ".css");
     const listpath = path.resolve(list);
-    const files = require(listpath);
-    let bundling = "";
-    bundling += this._opener(id, _module);
+    const nodes = require(listpath);
+    let bundlingJs = "";
+    let bundlingCss = "";
+    bundlingJs += this._opener(id, _module);
     IteratingFiles:
-    for(let index=0; index<files.length; index++) {
-      const file = files[index];
-      if(ignore.indexOf(file) !== -1) {
-        continue IteratingFiles;
+    for(let index_node=0; index_node<nodes.length; index_node++) {
+      let templateHtml = "";
+      const node = nodes[index_node];
+      const files = [
+        node + ".html",
+        node + ".js",
+        node + ".css",
+      ];
+      for(let index=0; index<files.length; index++) {
+        const file = files[index];
+        const filepath = path.resolve(file);
+        const filename = path.basename(filepath);
+        Apply_ignore_filters: {
+          if(ignore.indexOf(file) !== -1) {
+            continue IteratingFiles;
+          }
+          if(ignore.indexOf(filepath) !== -1) {
+            continue IteratingFiles;
+          }
+          if(ignore.indexOf(filename) !== -1) {
+            continue IteratingFiles;
+          }
+        }
+        if(!fs.existsSync(filepath)) {
+          if(filepath.endsWith(".js")) {
+            throw new Error("Could not find file «" + filepath + "» on «vuebundler.bundle»");
+          }
+        }
+        const content = fs.readFileSync(filepath).toString();
+        if(filename.endsWith(".html")) {
+          templateHtml = this.printAsString(content);
+        } else if(filename.endsWith(".js")) {
+          bundlingJs += this.replaceTemplate(content, templateHtml) + "\n";
+        } else if(filename.endsWith(".css")) {
+          bundlingCss += content + "\n";
+        }
       }
-      const filepath = path.resolve(file);
-      if(ignore.indexOf(filepath) !== -1) {
-        continue IteratingFiles;
-      }
-      const filename = path.basename(filepath);
-      if(ignore.indexOf(filename) !== -1) {
-        continue IteratingFiles;
-      }
-      const content = fs.readFileSync(filepath).toString();
-      bundling += content + "\n";
     }
-    bundling += this._closer();
-    fs.writeFileSync(outputpath, bundling, "utf8");
+    bundlingJs += this._closer();
+    fs.writeFileSync(outputpathJs, bundlingJs, "utf8");
+    fs.writeFileSync(outputpathCss, bundlingCss, "utf8");
     return this;
+  }
+
+  printAsString(text) {
+    return "`" + text.replace(/`/g, "\\`") + "`";
+  }
+
+  replaceTemplate(text, template) {
+    return text.replace("$template", template);
   }
 
 }
 
-module.exports = HtmlBundler;
+module.exports = vuebundler;

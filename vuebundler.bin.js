@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const HtmlBundler = require(__dirname + "/htmlbundler.js");
+const vuebundler = require(__dirname + "/vuebundler.js");
 const args = process.argv;
 const inputParameters = {};
 const nodePath = args.shift();
@@ -41,4 +41,4 @@ CollectParameters: {
     }
   }
 }
-HtmlBundler.bundle(inputParameters);
+vuebundler.bundle(inputParameters);

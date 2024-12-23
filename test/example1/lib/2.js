@@ -1,1 +1,1 @@
-window.b = 20;
+window.b = 2;

@@ -1,5 +1,5 @@
 module.exports = [
-  __dirname + "/lib/1.js",
-  __dirname + "/lib/2.js",
-  __dirname + "/lib/3.js",
+  __dirname + "/lib/components/page1/page1",
+  __dirname + "/lib/components/page2/page2",
+  __dirname + "/lib/components/page3/page3",
 ];
