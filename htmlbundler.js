@@ -45,6 +45,8 @@ class HtmlBundler {
   bundle(optionsInput = {}) {
     const options = Object.assign({}, this.constructor.defaultOptions, optionsInput);
     const { list, output, id, ignore = [], module:_module = true } = options;
+    const fs = require("fs");
+    const path = require("path");
     if(typeof list !== "string") {
       throw new Error("Required parameter «list» to be a string");
     }
@@ -63,8 +65,6 @@ class HtmlBundler {
     if(typeof _module !== "boolean") {
       throw new Error("Required parameter «module» to be a boolean");
     }
-    const fs = require("fs");
-    const path = require("path");
     const outputpath = path.resolve(output);
     const listpath = path.resolve(list);
     const files = require(listpath);
