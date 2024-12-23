@@ -11,13 +11,15 @@ const validParameters = {
   "--ignore": "ignore",
   "--id": "id",
   "--module": "module",
+  "--unwrapped": "unwrapped",
 };
 const typeParameters = {
   "list": "string",
   "output": "string",
   "id": "string",
   "ignore": "array",
-  "module": "boolean"
+  "module": "boolean",
+  "unwrapped": "boolean"
 };
 CollectParameters: {
   let currentParameter = "_";
@@ -37,7 +39,8 @@ CollectParameters: {
     } else if(currentType === "array") {
       inputParameters[currentParameter].push(arg);
     } else if(currentType === "boolean") {
-      inputParameters[currentParameter] = arg === "0" ? false : arg === "false" ? false : true;
+      const DEFAULT_BOOLEAN_VALUE = currentParameter === "unwrapped" ? false : true;
+      inputParameters[currentParameter] = arg === "0" ? false : arg === "false" ? false : DEFAULT_BOOLEAN_VALUE;
     }
   }
 }

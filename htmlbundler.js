@@ -44,7 +44,7 @@ class HtmlBundler {
 
   bundle(optionsInput = {}) {
     const options = Object.assign({}, this.constructor.defaultOptions, optionsInput);
-    const { list, output, id, ignore = [], module:_module = true } = options;
+    const { list, output, id, ignore = [], module:_module = true, wrap = true } = options;
     const fs = require("fs");
     const path = require("path");
     if(typeof list !== "string") {
@@ -65,11 +65,13 @@ class HtmlBundler {
     if(typeof _module !== "boolean") {
       throw new Error("Required parameter «module» to be a boolean");
     }
+    if(typeof wrap !== "boolean") {
+      throw new Error("Required parameter «wrap» to be a boolean");
+    }
     const outputpath = path.resolve(output);
     const listpath = path.resolve(list);
     const files = require(listpath);
     let bundling = "";
-    bundling += this._opener(id, _module);
     IteratingFiles:
     for(let index=0; index<files.length; index++) {
       const file = files[index];
@@ -87,7 +89,11 @@ class HtmlBundler {
       const content = fs.readFileSync(filepath).toString();
       bundling += content + "\n";
     }
-    bundling += this._closer();
+    Wrapping_or_not:
+    if(wrap) {
+      bundling = this._opener(id, _module) + bundling;
+      bundling += this._closer();
+    }
     fs.writeFileSync(outputpath, bundling, "utf8");
     return this;
   }

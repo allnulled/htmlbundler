@@ -21,6 +21,7 @@ htmlbundler
   --ignore file4.js file7.js file9.js
   --id MyCoolAPI
   --module false
+  --wrap true
 ```
 
 ## Usage by API
@@ -32,11 +33,15 @@ require(__dirname + "/htmlbundler.js").bundle({
     module: true,
     id: "Lib1",
     ignore: [],
+    wrap: true,
 }).bundle({
     list: "bundlelist.js",
     output: "test/example2/dist/app.js",
     module: true,
     id: "Lib2",
     ignore: ["only-browser.js"],
+    wrap: true,
 });
 ```
+
+Use `wrap: false` or `--wrap 0` to not pack the files as `.js`, but simple concatenation.
