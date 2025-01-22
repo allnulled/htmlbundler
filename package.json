@@ -1,6 +1,6 @@
 {
   "name": "@allnulled/htmlbundler",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Like simplebundler but using a *.js list file instead of a directory",
   "main": "htmlbundler.js",
   "bin": {
