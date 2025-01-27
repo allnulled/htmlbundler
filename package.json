@@ -7,7 +7,9 @@
     "htmlbundler": "htmlbundler.bin.js"
   },
   "scripts": {
-    "test": "npx mocha test/test.js"
+    "build": "echo 'no building for @allnulled/htmlbundler'",
+    "test": "npx mocha test/test.js",
+    "versionate": "echo 'no versionate for @allnulled/htmlbundler'"
   },
   "keywords": [
     "bundler",
